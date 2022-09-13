@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <nav className="nav-bar">
-      <Link to={"/"}>
+      <Link to="/">
         <h2>Online Shop</h2>
       </Link>
-      <Link to={"/cart"}>
+      <Link to="/cart">
         <div className="nav-bag">
           <svg
             xmlns="http://www.w3.org/2000/svg"
