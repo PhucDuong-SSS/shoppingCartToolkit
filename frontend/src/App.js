@@ -6,13 +6,15 @@ import Navbar from "./components/Navbar";
 import Cart from "./components/Cart";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
-import productsReducer from "./features/productsSlice";
+import productsReducer,  {productFetch} from "./features/productsSlice";
 
 const store = configureStore({
   reducer: {
     products: productsReducer,
   },
 });
+
+store.dispatch(productFetch())
 
 function App() {
   return (
