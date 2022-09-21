@@ -5,13 +5,14 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+const products = require("./products");
 
 app.get('/', (req, res) => {
     res.send("welcome to my api service");
 })
 
 app.get('/products', (req, res) => {
-    res.send([2,3,4])
+    res.send(products)
 })
 
 const port = process.env.POST || 5000;
