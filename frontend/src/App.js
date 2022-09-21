@@ -8,10 +8,12 @@ import Home from "./components/Home";
 import NotFound from "./components/NotFound";
 import productsReducer, { productFetch } from "./features/productsSlice";
 import { productsApi } from "./features/productsApi";
+import CartReducer from "./features/cartSlice";
 
 const store = configureStore({
   reducer: {
     products: productsReducer,
+    cart: CartReducer,
     [productsApi.reducerPath]: productsApi.reducer,
   },
   middleware: (detDefaultMiddleware) => {
