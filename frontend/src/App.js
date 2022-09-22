@@ -1,4 +1,5 @@
 import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
@@ -9,6 +10,7 @@ import NotFound from "./components/NotFound";
 import productsReducer, { productFetch } from "./features/productsSlice";
 import { productsApi } from "./features/productsApi";
 import CartReducer from "./features/cartSlice";
+import { ToastContainer } from "react-toastify";
 
 const store = configureStore({
   reducer: {
@@ -26,6 +28,7 @@ store.dispatch(productFetch());
 function App() {
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Provider store={store}>
         <div className="App">
           <Navbar />
