@@ -33,15 +33,42 @@ const cartSlice = createSlice({
     },
     removeFromCart: (state, action) => {
       const nextCartItem = state.cartItems.filter(
-        (item) => item.id !== action.payload
+        (item) => item.id !== action.payload.id
       );
       state.cartItems = nextCartItem;
+      toast.info(`remove ${action.payload.name} from cart`, {
+        position: "bottom-left",
+      });
+
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
       return state;
+    },
+    decreaseCart: (state, action) => {
+      const itemIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      if (state.cartItems[itemIndex].cartQuantity > 1) {
+        state.cartItems[itemIndex].cartQuantity -= 1;
+      } else {
+        const nextCartItem = state.cartItems.filter(
+          (item) => item.id !== action.payload.id
+        );
+        state.cartItems = nextCartItem;
+      }
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    },
+    increaseCart: (state, action) => {
+      const itemIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+
+      state.cartItems[itemIndex].cartQuantity += 1;
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
   },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, increaseCart, decreaseCart } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;
