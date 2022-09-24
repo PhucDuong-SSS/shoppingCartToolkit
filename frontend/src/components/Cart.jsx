@@ -1,10 +1,12 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   removeFromCart,
   decreaseCart,
   increaseCart,
-  clearCart
+  clearCart,
+  getTotal
 } from "../features/cartSlice";
 
 const Cart = () => {
@@ -13,15 +15,19 @@ const Cart = () => {
   const handleRemoveFromCart = (product) => {
     dispatch(removeFromCart(product));
   };
-  const handleDecreaseCart  = (product) => {
+  const handleDecreaseCart = (product) => {
     dispatch(decreaseCart(product));
-  }
+  };
   const handleIncreaseCart = (product) => {
     dispatch(increaseCart(product));
-  }
+  };
   const handleClearCart = () => {
     dispatch(clearCart());
-  }
+  };
+  useEffect(() => {
+    dispatch(getTotal());
+  }, [cart]);
+
   return (
     <div className="cart-container">
       <h2>Shopping Cart</h2>
@@ -71,9 +77,13 @@ const Cart = () => {
                   </div>
                   <div className="cart-product-price">${cartItem.price}</div>
                   <div className="cart-product-quantity">
-                    <button onClick={() => handleDecreaseCart(cartItem)}>-</button>
+                    <button onClick={() => handleDecreaseCart(cartItem)}>
+                      -
+                    </button>
                     <div className="count">{cartItem.cartQuantity}</div>
-                    <button onClick={() => handleIncreaseCart(cartItem)}>+</button>
+                    <button onClick={() => handleIncreaseCart(cartItem)}>
+                      +
+                    </button>
                   </div>
                   <div className="cart-product-total-price">
                     ${cartItem.price * cartItem.cartQuantity}
@@ -82,7 +92,9 @@ const Cart = () => {
               ))}
           </div>
           <div className="cart-summary">
-            <button className="clear-btn" onClick={() => handleClearCart()}>Clear Cart</button>
+            <button className="clear-btn" onClick={() => handleClearCart()}>
+              Clear Cart
+            </button>
             <div className="cart-checkout">
               <div className="subtotal">
                 <span>Subtotal</span>
