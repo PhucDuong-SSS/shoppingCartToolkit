@@ -4,6 +4,7 @@ import {
   removeFromCart,
   decreaseCart,
   increaseCart,
+  clearCart
 } from "../features/cartSlice";
 
 const Cart = () => {
@@ -17,6 +18,9 @@ const Cart = () => {
   }
   const handleIncreaseCart = (product) => {
     dispatch(increaseCart(product));
+  }
+  const handleClearCart = () => {
+    dispatch(clearCart());
   }
   return (
     <div className="cart-container">
@@ -78,7 +82,7 @@ const Cart = () => {
               ))}
           </div>
           <div className="cart-summary">
-            <button className="clear-btn">Clear Cart</button>
+            <button className="clear-btn" onClick={() => handleClearCart()}>Clear Cart</button>
             <div className="cart-checkout">
               <div className="subtotal">
                 <span>Subtotal</span>
